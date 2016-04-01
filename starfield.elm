@@ -10,7 +10,7 @@ velocity : Float
 velocity = 1.01
 
 starCount : Int
-starCount = 100
+starCount = 400
 
 type alias Bounds =
     { minX : Float
@@ -21,10 +21,10 @@ type alias Bounds =
 
 bounds: Bounds
 bounds =
-    { minX = 0.2
-    , minY = 0.2
-    , maxX = 0.5
-    , maxY = 0.5
+    { minX = 0.5
+    , minY = 0.5
+    , maxX = 0.8
+    , maxY = 0.8
     }
 
 type alias Star = 
@@ -36,6 +36,7 @@ type alias Star =
 type alias Stars =
     { stars : List Star
     , seed : Seed
+    , time : Float
     }
 
 
@@ -43,6 +44,7 @@ stars : Stars
 stars =
     { stars = []
     , seed = (initialSeed 1337)
+    , time = 0.0
     }
 
 
@@ -103,7 +105,8 @@ update time stars =
     in
         { stars |
             stars = updatedStars,
-            seed = updatedSeed
+            seed = updatedSeed,
+            time = time
         }
 
 
@@ -113,11 +116,14 @@ view stars (w, h) =
         w' = toFloat w
         h' = toFloat h
         forms = List.map (starToForm (w', h')) stars.stars
+        many = group forms
+        angle = stars.time * 0.0005
+        rotated = rotate (radians angle) many
     in
-        collage w h ([(background w' h')] ++ forms)
+        collage w h ([(background w' h')] ++ [rotated])
 
 
 main : Signal Element
 main = 
     -- view (update 0 stars) (500, 500)
-    Signal.map2 view (Signal.foldp update stars (fps 60)) Window.dimensions
+    Signal.map2 view (Signal.foldp update stars (Signal.foldp (+) 0 (fps 60))) Window.dimensions
