@@ -39,7 +39,8 @@ updateState time state =
     in
         { state |
             effect = effect,
-            time = time
+            time = time,
+            stars = Starfield.update state.time state.stars
         }
 
 selectEffectTime : Float -> Effect
@@ -71,7 +72,7 @@ view state (w, h) =
         Hypnocorn ->
             flow outward [hypnocorn w h state.time, toElement 1 1 muzak]
         Starfield ->
-            flow outward [Starfield.view (Starfield.update state.time state.stars) (w, h), toElement 1 1 muzak]
+            flow outward [Starfield.view state.stars (w, h), toElement 1 1 muzak]
         Chilicorn ->
             flow outward [chilicorn w h state.time, toElement 1 1 muzak]
         Rotozoom ->
