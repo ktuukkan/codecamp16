@@ -11,8 +11,6 @@ main =
 
 draw w h t =
     if ((t/1000) < 10) then
-        chilicorn w h t
-    else if ((t/1000) < 20) then
         chilimatrix w h t
     else if ((t/1000) < 40) then
         rotozoom w h t
