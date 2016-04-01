@@ -5,7 +5,7 @@ import Time exposing (..)
 import Random exposing (..)
 import Basics exposing (..)
 import Window
-import Plasma
+import Plasma exposing (..)
 
 main =
   Signal.map3 draw Window.width Window.height (Signal.foldp (+) 0 (fps 30))
@@ -18,7 +18,7 @@ draw w h t =
     else if ((t/1000) < 70) then
         hypnocorn w h t
     else if ((t/1000) < 80) then
-        Plasma.plasma w h t
+        plasma w h t
     else
         chilicorn w h t
 
