@@ -1,4 +1,4 @@
-module Rotozoom(cornfield, rotozoom) where
+module Rotozoom(cornfield, rotozoom, main) where
 
 import Color exposing (..)
 import Graphics.Collage exposing (..)
@@ -15,7 +15,7 @@ cornfield w h t =
   collage w h
     [ tiledImage (w * 5) (h * 5) "chilicorn.png"
         |> toForm
-        |> scale(0.4)
+        |> scale(0.425)
         |> alpha ((t/4000))
     ]
 

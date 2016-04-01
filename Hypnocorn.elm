@@ -1,4 +1,4 @@
-module Hypnocorn(hypnocorn) where
+module Hypnocorn(hypnocorn, main) where
 
 import Color exposing (..)
 import Graphics.Collage exposing (..)
