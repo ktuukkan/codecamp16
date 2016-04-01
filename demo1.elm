@@ -9,6 +9,8 @@ import Plasma exposing (..)
 import Hypnocorn exposing (..)
 import Rotozoom exposing (..)
 import Starfield
+import Html exposing (..)
+import Html.Attributes exposing (..)
 
 
 type Effect = Cornfield | Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn
@@ -19,6 +21,10 @@ type alias State =
     , stars: Starfield.Stars
     }
 
+muzak : Html
+muzak =
+    Html.audio [ src "muzak.mp3", preload "true", autoplay True ] []
+
 initialState : State
 initialState =
     { effect = Chilicorn
@@ -27,13 +33,13 @@ initialState =
     }
 
 updateState : Float -> State -> State
-updateState time state = 
+updateState time state =
     let
         effect = selectEffectTime (time / 1000)
     in
         { state |
             effect = effect,
-            time = time 
+            time = time
         }
 
 selectEffectTime : Float -> Effect
@@ -50,7 +56,7 @@ selectEffectTime t =
         Plasma
     else
         Chilicorn
-        
+
 
 main : Signal Element
 main =
