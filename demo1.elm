@@ -67,17 +67,17 @@ view : State -> (Int, Int) -> Element
 view state (w, h) =
     case state.effect of
         Cornfield ->
-            cornfield w h state.time
+            flow outward [cornfield w h state.time, toElement 1 1 muzak]
         Hypnocorn ->
-            hypnocorn w h state.time
+            flow outward [hypnocorn w h state.time, toElement 1 1 muzak]
         Starfield ->
-            Starfield.view (Starfield.update state.time state.stars) (w, h)
+            flow outward [Starfield.view (Starfield.update state.time state.stars) (w, h), toElement 1 1 muzak]
         Chilicorn ->
-            chilicorn w h state.time
+            flow outward [chilicorn w h state.time, toElement 1 1 muzak]
         Rotozoom ->
-            rotozoom w h state.time
+            flow outward [rotozoom w h state.time, toElement 1 1 muzak]
         Plasma ->
-            plasma w h state.time
+            flow outward [plasma w h state.time, toElement 1 1 muzak]
 
 chilicorn w h t =
     collage w h
