@@ -73,7 +73,7 @@ view state (w, h) =
         Hypnocorn ->
             flow outward [hypnocorn w h state.time, muzak]
         Starfield ->
-            flow outward [Starfield.view state.stars (w, h) (w, h), muzak]
+            flow outward [Starfield.view state.stars (w, h), muzak]
         Chilicorn ->
             flow outward [chilicorn w h state.time, muzak]
         Rotozoom ->
