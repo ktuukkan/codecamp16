@@ -21,9 +21,10 @@ type alias State =
     , stars: Starfield.Stars
     }
 
-muzak : Html
+muzak : Element
 muzak =
     Html.audio [ src "muzak.mp3", preload "true", autoplay True ] []
+      |> toElement 1 1
 
 initialState : State
 initialState =
@@ -68,17 +69,17 @@ view : State -> (Int, Int) -> Element
 view state (w, h) =
     case state.effect of
         Cornfield ->
-            flow outward [cornfield w h state.time, toElement 1 1 muzak]
+            flow outward [cornfield w h state.time, muzak]
         Hypnocorn ->
-            flow outward [hypnocorn w h state.time, toElement 1 1 muzak]
+            flow outward [hypnocorn w h state.time, muzak]
         Starfield ->
-            flow outward [Starfield.view state.stars (w, h), toElement 1 1 muzak]
+            flow outward [Starfield.view state.stars (w, h) (w, h), muzak]
         Chilicorn ->
-            flow outward [chilicorn w h state.time, toElement 1 1 muzak]
+            flow outward [chilicorn w h state.time, muzak]
         Rotozoom ->
-            flow outward [rotozoom w h state.time, toElement 1 1 muzak]
+            flow outward [rotozoom w h state.time, muzak]
         Plasma ->
-            flow outward [plasma w h state.time, toElement 1 1 muzak]
+            flow outward [plasma w h state.time, muzak]
 
 chilicorn w h t =
     collage w h
