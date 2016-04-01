@@ -29,5 +29,5 @@ chilicorn w h t =
       [ image h h "chilicorn.png"
         |> toForm
         |> scale (0.33)
-        |> alpha (1 - sin(t/1000))
+        |> alpha (1.05 - sin(t/1000))
       ]
