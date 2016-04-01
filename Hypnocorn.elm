@@ -1,3 +1,5 @@
+module Hypnocorn(hypnocorn) where
+
 import Color exposing (..)
 import Graphics.Collage exposing (..)
 import Graphics.Element exposing (..)
@@ -7,9 +9,9 @@ import Basics exposing (..)
 import Window
 
 main =
-  Signal.map3 draw Window.width Window.height (Signal.foldp (+) 0 (fps 30))
+  Signal.map3 hypnocorn Window.width Window.height (Signal.foldp (+) 0 (fps 30))
 
-draw w h t =
+hypnocorn w h t =
   collage w h
     [ ngon 5 (toFloat w/11)
         |> filled colorize
@@ -53,5 +55,3 @@ draw w h t =
 colorize : Color
 colorize =
   rgba 0 64 0 0.30
-
---rand t = fst <| generate (int 0 10) (initialSeed <| floor t)
