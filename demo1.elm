@@ -9,17 +9,19 @@ import Plasma exposing (..)
 import Hypnocorn exposing (..)
 import Rotozoom exposing (..)
 import Starfield
+import SquareThing
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
-type Effect = Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn
+type Effect = Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn | SquareThing
 
 type alias State =
     { effect : Effect
     , effectStart : Float
     , time : Float
-    , stars: Starfield.Stars
+    , stars : Starfield.Stars
+    , squares : SquareThing.Squares
     }
 
 muzak : Element
@@ -33,6 +35,7 @@ initialState =
     , effectStart = 0
     , time = 0
     , stars = Starfield.stars
+    , squares = SquareThing.initialSquares
     }
 
 updateState : Float -> State -> State
@@ -49,7 +52,8 @@ updateState time state =
             effect = effect,
             effectStart = effectStart,
             time = time,
-            stars = Starfield.update state.time state.stars
+            stars = Starfield.update state.time state.stars,
+            squares = SquareThing.update state.time state.squares
         }
 
 selectEffect : Float -> Effect
@@ -62,6 +66,8 @@ selectEffect t =
         Hypnocorn
     else if t < 80 then
         Plasma
+    else if t < 100 then
+        SquareThing
     else
         Chilicorn
 
@@ -86,6 +92,8 @@ view state (w, h) =
             rotozoom w h time
         Plasma ->
             plasma w h time
+        SquareThing ->
+            SquareThing.view state.squares (w, h)
     in
       flow outward [effectView, muzak]
 
