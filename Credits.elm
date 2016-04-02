@@ -50,7 +50,7 @@ message t =
     else if t < 20000 then
         fromString "-=[ plasma - aahv ]=-"
     else if t < 24000 then
-        fromString "-=[ pixelmajick - mmyn ]=-"
+        fromString "-=[ squarething - mmyn ]=-"
     else if t < 28000 then
         fromString "-=[ greetz to Hummeripojat! ]"
     else
