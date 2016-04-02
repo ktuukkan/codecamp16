@@ -17,6 +17,7 @@ type Effect = Cornfield | Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn
 
 type alias State =
     { effect : Effect
+    , effectStart : Float
     , time : Float
     , stars: Starfield.Stars
     }
@@ -29,6 +30,7 @@ muzak =
 initialState : State
 initialState =
     { effect = Chilicorn
+    , effectStart = 0
     , time = 0
     , stars = Starfield.stars
     }
@@ -36,16 +38,22 @@ initialState =
 updateState : Float -> State -> State
 updateState time state =
     let
-        effect = selectEffectTime (time / 1000)
+        effect = selectEffect (time / 1000)
+        effectStart =
+            if effect /= state.effect then
+                time
+            else
+                state.effectStart
     in
         { state |
             effect = effect,
+            effectStart = effectStart,
             time = time,
             stars = Starfield.update state.time state.stars
         }
 
-selectEffectTime : Float -> Effect
-selectEffectTime t =
+selectEffect : Float -> Effect
+selectEffect t =
     if t < 10 then
         Cornfield
     else if t < 20 then
