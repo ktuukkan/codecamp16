@@ -9,13 +9,13 @@ Team "Old Skool"
 - Antti Ahvenlampi
 - Kimmo Tuukkanen
 
-Usage
+### Usage
 
 See the demo [here](http://ktuukkan.github.io/codecamp16/).
 
 1. Drop your favourite 8bit tune in ./muzak.mp3
 2. Open final.html in your browser
 
-Acknowledgements
+### Acknowledgements
 
 - chilicorn.png: “Spice Program logo” by Futurice, licensed under CC BY-SA 4.0
