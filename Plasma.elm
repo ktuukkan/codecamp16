@@ -1,4 +1,4 @@
-module Plasma(plasma) where
+module Plasma(plasma, main) where
 
 import Graphics.Element exposing (..)
 import Math.Vector3 exposing (..)
@@ -23,6 +23,10 @@ mesh = Triangle
     , Vertex (vec3 0 0 0) (vec3 0 0 1)
     )
   ]
+
+main : Signal Element
+main =
+    Signal.map3 plasma Window.width Window.height (Signal.foldp (+) 0 (fps 30))
 
 plasma : Int -> Int -> Float -> Element
 plasma w h t =
@@ -51,6 +55,13 @@ varying vec3 pos;
 
 const float pi = 3.1415926;
 
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
 void main () {
     vec2 c = 2.0 * (pos.xy + vec2(sin(t / 5.0), cos(t / 3.0)));
 
@@ -60,6 +71,6 @@ void main () {
 
     float v = v1 + v2 + v3;
 
-    gl_FragColor = vec4(0.3 * (sin(v * pi) + 1.0), 0.4 * (sin(v * pi + 2.0 * pi / 3.0) + 1.0), 0.5 * (sin(v * pi + 4.0 * pi / 3.0) + 1.0), 1.0);
+    gl_FragColor = vec4(hsv2rgb(vec3(v / 2.0, 0.99, 1.0)), 1.0);
 }
 |]
