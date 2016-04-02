@@ -11,6 +11,8 @@ Team "Old Skool"
 
 Usage
 
+See the demo [here](http://ktuukkan.github.io/codecamp16/).
+
 1. Drop your favourite 8bit tune in ./muzak.mp3
 2. Open final.html in your browser
 
