@@ -13,7 +13,7 @@ main =
   Signal.map3 credits Window.width Window.height (Signal.foldp (+) 0 (fps 30))
 
 credits w h t =
-    if (t < 33000) then
+    if (t < 36000) then
         collage w h
             [ rect (toFloat w) (toFloat h)
                 |> filled black
@@ -52,6 +52,8 @@ message t =
     else if t < 24000 then
         fromString "-=[ squarething - mmyn & aahv ]=-"
     else if t < 28000 then
-        fromString "-=[ greetz to Hummeripojat! ]"
+        fromString "-=[ credits - ktuu ]=-"
+    else if t < 32000 then
+        fromString "-=[ greetz to Hummeripojat! ]=-"
     else
         fromString "chilicorn.org"
