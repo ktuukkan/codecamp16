@@ -54,11 +54,9 @@ updateState time state =
 
 selectEffect : Float -> Effect
 selectEffect t =
-    if t < 10 then
-        Cornfield
-    else if t < 20 then
+    if t < 15 then
         Starfield
-    else if t < 40 then
+    else if t < 45 then
         Rotozoom
     else if t < 60 then
         Hypnocorn
@@ -75,24 +73,27 @@ main =
 
 view : State -> (Int, Int) -> Element
 view state (w, h) =
+    let
+      time = (state.time - state.effectStart)
+    in
     case state.effect of
         Cornfield ->
-            flow outward [cornfield w h state.time, muzak]
+            empty --flow outward [cornfield w h time, muzak]
         Hypnocorn ->
-            flow outward [hypnocorn w h state.time, muzak]
+            flow outward [hypnocorn w h time, muzak]
         Starfield ->
             flow outward [Starfield.view state.stars (w, h), muzak]
         Chilicorn ->
-            flow outward [chilicorn w h state.time, muzak]
+            flow outward [chilicorn w h time, muzak]
         Rotozoom ->
-            flow outward [rotozoom w h state.time, muzak]
+            flow outward [rotozoom w h time, muzak]
         Plasma ->
-            flow outward [plasma w h state.time, muzak]
+            flow outward [plasma w h time, muzak]
 
 chilicorn w h t =
     collage w h
       [ image h h "chilicorn.png"
         |> toForm
         |> scale (0.33)
-        |> alpha (1.05 - sin(t/1000))
+        |> alpha (0 + sin(t/1000))
       ]

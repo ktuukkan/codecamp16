@@ -1,4 +1,4 @@
-module Rotozoom(cornfield, rotozoom, main) where
+module Rotozoom(rotozoom, main) where
 
 import Color exposing (..)
 import Graphics.Collage exposing (..)
@@ -11,19 +11,21 @@ import Window
 main =
   Signal.map3 rotozoom Window.width Window.height (Signal.foldp (+) 0 (fps 30))
 
-cornfield w h t =
-  collage w h
-    [ tiledImage (w * 5) (h * 5) "chilicorn.png"
-        |> toForm
-        |> scale(0.425)
-        |> alpha ((t/4000))
-    ]
-
 rotozoom w h t =
-  collage w h
-    [ tiledImage (w * 5) (h * 5) "chilicorn.png"
-        |> toForm
-        |> scale(1.33 + cos(t/1000))
-        |> rotate (degrees ((sin(t/1000) * 100) + (cos(t/2000)) * 150))
-        |> move ((sin(t/1000) * 150), (sin(t/1000) * 150))
-    ]
+  if t < 10000 then
+      collage w h
+        [ tiledImage (w * 5) (h * 5) "chilicorn.png"
+            |> toForm
+            |> scale (1.33 + cos(10000/1000))
+            |> alpha (t/5000)
+            |> rotate (degrees ((sin(10000/1000) * 100) + (cos(10000/2000)) * 150))
+            |> move ((sin(t/1000) * 150), (sin(10000/1000) * 150))
+        ]
+  else
+      collage w h
+        [ tiledImage (w * 5) (h * 5) "chilicorn.png"
+            |> toForm
+            |> scale(1.33 + cos(t/1000))
+            |> rotate (degrees ((sin(t/1000) * 100) + (cos(t/2000)) * 150))
+            |> move ((sin(t/1000) * 150), (sin(t/1000) * 150))
+        ]
