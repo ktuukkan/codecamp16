@@ -7,11 +7,12 @@ import Window
 import Debug
 import List.Extra exposing (..)
 import Time exposing (..)
+import Math.Vector2 exposing (..)
 
 type alias Square =
     { x : Float
     , y : Float
-    , lit : Bool
+    , color : Color
     }
 
 
@@ -28,11 +29,7 @@ initialSquares =
 squareToForm : (Float, Float) -> Square -> Form
 squareToForm (w, h) sqr =
     let
-        color =
-            if sqr.lit then
-                white
-            else
-                red
+        color = sqr.color
     in
         move (w * sqr.x, h * sqr.y) (filled color (square 10))
 
@@ -41,7 +38,7 @@ makeSquare : (Int, Int) -> Square
 makeSquare (x, y) =
     { x = (toFloat x) * 0.02
     , y = (toFloat y) * 0.02
-    , lit = True
+    , color = white
     }
 
 
@@ -61,11 +58,11 @@ checkLit t sqr =
         tt = t / 100
         x = sqr.x * 50
         y = sqr.y * 50
-
-        lit = sin (x + tt) + cos(tt) < 0.5
+        l = length(vec2 (x + 25 * sin(0.4 * tt)) (y + 25 * cos(0.3 * tt)))
+        c = hsl (sin (l - tt)) 1 0.5
     in
         { sqr |
-            lit = lit
+            color = c
         }
 
 
