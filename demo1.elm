@@ -12,9 +12,9 @@ import Starfield
 import SquareThing
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Credits exposing (..)
 
-
-type Effect = Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn | SquareThing
+type Effect = Rotozoom | Hypnocorn | Plasma | Starfield | Credits | SquareThing
 
 type alias State =
     { effect : Effect
@@ -31,7 +31,7 @@ muzak =
 
 initialState : State
 initialState =
-    { effect = Chilicorn
+    { effect = Starfield
     , effectStart = 0
     , time = 0
     , stars = Starfield.stars
@@ -69,7 +69,7 @@ selectEffect t =
     else if t < 100 then
         SquareThing
     else
-        Chilicorn
+        Credits
 
 
 main : Signal Element
@@ -86,8 +86,8 @@ view state (w, h) =
             hypnocorn w h time
         Starfield ->
             Starfield.view state.stars (w, h)
-        Chilicorn ->
-            chilicorn w h time
+        Credits ->
+            credits w h time
         Rotozoom ->
             rotozoom w h time
         Plasma ->
@@ -96,11 +96,3 @@ view state (w, h) =
             SquareThing.view state.squares (w, h)
     in
       flow outward [effectView, muzak]
-
-chilicorn w h t =
-    collage w h
-      [ image h h "chilicorn.png"
-        |> toForm
-        |> scale (0.33)
-        |> alpha (0 + sin(t/1000))
-      ]
