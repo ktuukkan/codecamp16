@@ -13,7 +13,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
-type Effect = Cornfield | Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn
+type Effect = Rotozoom | Hypnocorn | Plasma | Starfield | Chilicorn
 
 type alias State =
     { effect : Effect
@@ -75,20 +75,19 @@ view : State -> (Int, Int) -> Element
 view state (w, h) =
     let
       time = (state.time - state.effectStart)
-    in
-    case state.effect of
-        Cornfield ->
-            empty --flow outward [cornfield w h time, muzak]
+      effectView = case state.effect of
         Hypnocorn ->
-            flow outward [hypnocorn w h time, muzak]
+            hypnocorn w h time
         Starfield ->
-            flow outward [Starfield.view state.stars (w, h), muzak]
+            Starfield.view state.stars (w, h)
         Chilicorn ->
-            flow outward [chilicorn w h time, muzak]
+            chilicorn w h time
         Rotozoom ->
-            flow outward [rotozoom w h time, muzak]
+            rotozoom w h time
         Plasma ->
-            flow outward [plasma w h time, muzak]
+            plasma w h time
+    in
+      flow outward [effectView, muzak]
 
 chilicorn w h t =
     collage w h
