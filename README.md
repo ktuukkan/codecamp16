@@ -11,6 +11,8 @@ Team "Old Skool"
 
 See the demo [here](http://ktuukkan.github.io/codecamp16/).
 
+License: [MIT](https://github.com/ktuukkan/codecamp16/blob/master/LICENSE)
+
 ### Acknowledgements
 
 - chilicorn.png: “Spice Program logo” by Futurice, licensed under CC BY-SA 4.0
