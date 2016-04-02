@@ -7,6 +7,7 @@ import Time exposing (..)
 import Random exposing (..)
 import Window
 import Debug
+import Math.Vector2 exposing (..)
 
 velocity : Float
 velocity = 1.01
@@ -57,7 +58,10 @@ background w h =
 
 starToForm : (Float, Float) -> Star -> Form
 starToForm (w, h) star =
-    move (w * star.x, h * star.y) (filled white (square 3))
+    let 
+      len = length(vec2 star.x star.y)
+    in
+      move (w * star.x, h * star.y) (filled (grayscale (0.8 - len)) (square (10.0 * len)))
 
 
 tupleToStar : (Float, Float) -> Star
