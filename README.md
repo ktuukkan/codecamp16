@@ -19,3 +19,4 @@ See the demo [here](http://ktuukkan.github.io/codecamp16/).
 ### Acknowledgements
 
 - chilicorn.png: “Spice Program logo” by Futurice, licensed under CC BY-SA 4.0
+- muzak.mp3: [discoban.mod](http://modarchive.org/index.php?request=view_by_moduleid&query=67103) (see page for full author info) is licenced under [Mod Archive Distribution licence](http://modarchive.org/index.php?terms-upload).
