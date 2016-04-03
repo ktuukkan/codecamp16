@@ -16,10 +16,10 @@ rotozoom w h t =
       collage w h
         [ tiledImage (w * 5) (h * 5) "chilicorn.png"
             |> toForm
-            |> scale (1.33 + cos(10000/1000))
+            |> scale (1.33 + cos(10))
             |> alpha (t/5000)
-            |> rotate (degrees ((sin(10000/1000) * 100) + (cos(10000/2000)) * 150))
-            |> move ((sin(t/1000) * 150), (sin(10000/1000) * 150))
+            |> rotate (degrees ((sin(10) * 100) + (cos(5)) * 150))
+            |> move ((sin(t/1000) * 150), (sin(10) * 150))
         ]
   else
       collage w h
